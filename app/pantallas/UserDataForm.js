@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import Feather from '@expo/vector-icons/Feather';
+import { useRouter } from 'expo-router';
 
 const languages = [
     "🇺🇸 Ingles",
@@ -30,6 +31,7 @@ const corrections = [
 ]
 
 export default function UserDataForm({ password, email, setViewMain }) {
+    const router = useRouter();
     const [step, setStep] = useState(1);
     const [view, setView] = useState("lenguaje");
     const totalSteps = 4;
@@ -195,6 +197,11 @@ export default function UserDataForm({ password, email, setViewMain }) {
         }
     }
 
+    const handleRegistration = () => {
+        //llamada a api
+        router.navigate('/(tabs)/home')
+    }
+
     return (
         <View className="bg-black min-h-screen items-center justify-center">
             <View className='h-1/6 w-full justify-start items-center'>
@@ -218,7 +225,7 @@ export default function UserDataForm({ password, email, setViewMain }) {
                             <Text className="text-lg text-white">Volver</Text>
                         </TouchableOpacity>
                         {view == "corrections" ?
-                            <TouchableOpacity className='h-3/6 w-5/12 bg-fuchsia-500 rounded-2xl text-center items-center justify-center flex-row gap-x-2' onPress={() => handleStepsUp()}>
+                            <TouchableOpacity className='h-3/6 w-5/12 bg-fuchsia-500 rounded-2xl text-center items-center justify-center flex-row gap-x-2' onPress={() => handleRegistration()}>
                                 <Text className="text-lg text-white">Finalizar</Text>
                                 <Feather name="check" size={22} color="white" />
 
