@@ -1,10 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function Dictionary() {
+const MessageUser = () => {
   return (
     <View>
-      <Text>Dictionary</Text>
+      <Text>MessageUser</Text>
     </View>
   )
 }
+
+export default MessageUser
