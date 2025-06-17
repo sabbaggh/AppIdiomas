@@ -2,6 +2,10 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import Feather from '@expo/vector-icons/Feather';
 import { useRouter } from 'expo-router';
+import { useUser } from '../context/UserContext';
+
+
+
 
 const languages = [
     "🇺🇸 Ingles",
@@ -32,6 +36,7 @@ const corrections = [
 
 export default function UserDataForm({ password, email, setViewMain }) {
     const router = useRouter();
+    const { setUserDataa } = useUser();
     const [step, setStep] = useState(1);
     const [view, setView] = useState("lenguaje");
     const totalSteps = 4;
@@ -197,9 +202,62 @@ export default function UserDataForm({ password, email, setViewMain }) {
         }
     }
 
-    const handleRegistration = () => {
-        //llamada a api
-        router.navigate('/(tabs)/home')
+    const handleRegistration = async () => {
+        const languageMap = {
+            "🇺🇸 Ingles": "en",
+            "🇨🇳 Chino": "cn",
+            "🇵🇹 Portugues": "pt",
+        };
+
+        const levelMap = {
+            "Principante": "principiante",
+            "Intermedio": "intermedio",
+            "Avanzado": "avanzado",
+        };
+
+        const correctionMap = {
+            "Siempre": "siempre",
+            "De vez en cuando": "a_veces",
+            "Nunca": "nunca",
+        };
+
+        const formattedUserData = {
+            mail: userData.email,
+            password: userData.password,
+            language: languageMap[userData.language],
+            level: levelMap[userData.level],
+            corrections: correctionMap[userData.correction],
+            interests: userData.interests.map(i => {
+                const emojis = ["🎮", "🎥", "⛩️", "👟", "✈️", "🤖", "🖥️"];
+                let clean = i;
+                emojis.forEach(e => clean = clean.replace(e, ''));
+                return clean.trim().toLowerCase(); // ejemplo: "tecnologia"
+            }),
+        };
+        try {
+            const response = await fetch("http://192.168.100.75:8000/users/sign-up", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formattedUserData),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error("Error al registrar usuario:", errorText);
+                alert("Error al registrar usuario");
+                return;
+            }
+
+            const result = await response.json();
+            console.log("Usuario registrado:", result);
+            setUserDataa(formattedUserData);
+            router.navigate("/(tabs)/home");
+        } catch (error) {
+            console.error("Error de red o servidor:", error);
+            alert("Error de conexión con el servidor");
+        }
     }
 
     return (

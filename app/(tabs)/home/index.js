@@ -5,6 +5,7 @@ import Feather from '@expo/vector-icons/Feather'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import DialogueCard from './components/dialogueCard'
 import { useRouter } from 'expo-router'
+import { useUser } from '../../context/UserContext'
 
 const convos = [
   {
@@ -12,7 +13,6 @@ const convos = [
     "id": 1,
     "language": "CN",
     "level": "beginner",
-    "component_height": 48,
     "image": "https://img-cdn.inc.com/image/upload/f_webp,q_auto,c_fit/images/panoramic/GettyImages-1318950018_535375_uwicaq.jpg"
   },
   {
@@ -20,7 +20,6 @@ const convos = [
     "id": 2,
     "language": "CN",
     "level": "intermediate",
-    "component_height": 48,
     "image": "https://nypost.com/wp-content/uploads/sites/2/2025/01/office-worker-coming-late-meeting-97303488.jpg?quality=75&strip=all"
   },
   {
@@ -28,7 +27,6 @@ const convos = [
     "id": 3,
     "language": "CN",
     "level": "advanced",
-    "component_height": 48,
     "image": "xd",
   },
   {
@@ -36,7 +34,6 @@ const convos = [
     "id": 4,
     "language": "CN",
     "level": "beginner",
-    "component_height": 48,
     "image": "https://www.parentmap.com/sites/default/files/styles/1180x660_scaled_cropped/public/2024-08/girl%20on%20first%20day%20of%20school%20holding%20a%20sign_istock.jpg?itok=5yOyTbBM"
   },
   {
@@ -44,13 +41,14 @@ const convos = [
     "id": 5,
     "language": "CN",
     "level": "intermediate",
-    "component_height": 48,
     "image": "https://www.rwrecruitment.com/wp-content/uploads/2019/09/Getting-to-know-your-colleagues-in-a-new-job.jpg"
   },
 ]
 
 export default function Home() {
   const router = useRouter();
+  const {userDataa} = useUser();
+  console.log(userDataa)
   const [componentsLeft, setComponentsLeft] = useState([]);
   const [componentsRight, setComponentsRight] = useState([]);
   useEffect(() => {
@@ -77,7 +75,7 @@ export default function Home() {
         {/* Encabezado */}
         <View className="h-16 w-full flex-row justify-start items-center px-2 gap-x-2 border-b-fuchsia-500 border-2">
           <Feather name="user" size={28} color="white" />
-          <Text className="text-white text-2xl">你好 Usuario!</Text>
+          <Text className="text-white text-2xl">{userDataa.language == "cn" ? "你好" : userDataa.language == "pt" ? "Obrigado" : "Hello"} {userDataa.mail}!</Text>
         </View>
 
         {/* Contenido desplazable */}
@@ -93,10 +91,10 @@ export default function Home() {
             </View>
             <View className="w-7/12 pr-10">
               <Text className="text-white text-2xl font-extrabold">
-                Chatea Ahora!
+                Practica Ahora!
               </Text>
               <Text className="text-white leading-relaxed text-lg font-light">
-                Chatea sobre temas de tu interes de acuerdo con tu nivel
+                Crea una conversacion sobre temas de tu interes de acuerdo con tu nivel
               </Text>
             </View>
           </View>
