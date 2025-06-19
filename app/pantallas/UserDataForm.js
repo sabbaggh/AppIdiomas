@@ -59,7 +59,7 @@ export default function UserDataForm({ password, email, setViewMain }) {
 
                 <View className='bg-black w-full h-full justify-center   items-center gap-y-12'>
                     {languages.map((language) => {
-                        return (<TouchableOpacity className={`w-11/12 h-14 justify-center items-center rounded-xl ${userData.language == language ? "bg-fuchsia-500" : "bg-slate-800"}`} key={language} onPress={() => {
+                        return (<TouchableOpacity className={`w-11/12 h-14 justify-center items-center rounded-xl ${userData.language == language ? "bg-blue-500" : "bg-slate-800"}`} key={language} onPress={() => {
                             setUserData(prevState => ({
                                 ...prevState, // Mantén todos los demás campos igual
                                 language: language // Actualiza solo el campo 'language'
@@ -82,7 +82,7 @@ export default function UserDataForm({ password, email, setViewMain }) {
                 <View className='bg-black w-full h-full justify-start items-center gap-y-6 gap-x-4 flex-wrap flex-row pt-8'>
                     {interests.map((interest) => {
                         return (
-                            <TouchableOpacity key={interest} className={`p-3 justify-center items-center rounded-xl ${userData.interests.includes(interest) ? "bg-fuchsia-500" : "bg-slate-800"}`} onPress={() => {
+                            <TouchableOpacity key={interest} className={`p-3 justify-center items-center rounded-xl ${userData.interests.includes(interest) ? "bg-blue-500" : "bg-slate-800"}`} onPress={() => {
                                 setUserData(prevState => {
                                     // Si el interés ya está seleccionado, lo quitamos
                                     if (prevState.interests.includes(interest)) {
@@ -118,7 +118,7 @@ export default function UserDataForm({ password, email, setViewMain }) {
 
                 <View className='bg-black w-full h-full justify-center   items-center gap-y-12'>
                     {levels.map((level) => {
-                        return (<TouchableOpacity className={`w-11/12 h-14 justify-center items-center rounded-xl ${userData.level == level ? "bg-fuchsia-500" : "bg-slate-800"}`} key={level} onPress={() => {
+                        return (<TouchableOpacity className={`w-11/12 h-14 justify-center items-center rounded-xl ${userData.level == level ? "bg-blue-500" : "bg-slate-800"}`} key={level} onPress={() => {
                             setUserData(prevState => ({
                                 ...prevState, // Mantén todos los demás campos igual
                                 level: level // Actualiza solo el campo 'language'
@@ -141,7 +141,7 @@ export default function UserDataForm({ password, email, setViewMain }) {
 
                 <View className='bg-black w-full h-full justify-center   items-center gap-y-12'>
                     {corrections.map((correction) => {
-                        return (<TouchableOpacity className={`w-11/12 h-14 justify-center items-center rounded-xl ${userData.correction == correction ? "bg-fuchsia-500" : "bg-slate-800"}`} key={correction} onPress={() => {
+                        return (<TouchableOpacity className={`w-11/12 h-14 justify-center items-center rounded-xl ${userData.correction == correction ? "bg-blue-500" : "bg-slate-800"}`} key={correction} onPress={() => {
                             setUserData(prevState => ({
                                 ...prevState, // Mantén todos los demás campos igual
                                 correction: correction // Actualiza solo el campo 'language'
@@ -266,7 +266,7 @@ export default function UserDataForm({ password, email, setViewMain }) {
                 <View className={`h-4 w-full bg-gray-800 rounded-full`}>
                     <View
                         style={{ width: `${(step / totalSteps) * 100}%` }} // Estilo dinámico
-                        className='h-full bg-fuchsia-500 rounded-full'
+                        className='h-full bg-blue-500 rounded-full'
                     />
                 </View>
             </View>
@@ -283,12 +283,12 @@ export default function UserDataForm({ password, email, setViewMain }) {
                             <Text className="text-lg text-white">Volver</Text>
                         </TouchableOpacity>
                         {view == "corrections" ?
-                            <TouchableOpacity className='h-3/6 w-5/12 bg-fuchsia-500 rounded-2xl text-center items-center justify-center flex-row gap-x-2' onPress={() => handleRegistration()}>
+                            <TouchableOpacity className='h-3/6 w-5/12 bg-blue-500 rounded-2xl text-center items-center justify-center flex-row gap-x-2' onPress={() => handleRegistration()}>
                                 <Text className="text-lg text-white">Finalizar</Text>
                                 <Feather name="check" size={22} color="white" />
 
                             </TouchableOpacity>
-                            : <TouchableOpacity className='h-3/6 w-5/12 bg-fuchsia-500 rounded-2xl text-center items-center justify-center flex-row gap-x-2' onPress={() => handleStepsUp()}>
+                            : <TouchableOpacity className='h-3/6 w-5/12 bg-blue-500 rounded-2xl text-center items-center justify-center flex-row gap-x-2' onPress={() => handleStepsUp()}>
                                 <Text className="text-lg text-white">Siguiente</Text>
                                 <Feather name="arrow-right" size={22} color="white" />
 

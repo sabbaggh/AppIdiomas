@@ -48,7 +48,7 @@ const DialogueCard = ({ dialogueData, router }) => {
               {dialogueData.title}
             </Text>
             <Text className="text-white text-sm">
-              Dialogo {dialogueData.language}
+              Dialogo {dialogueData.language == "en" ? "EN" : dialogueData.language == "cn" ? "CN" : "PT"}
             </Text>
           </View>
         </LinearGradient>

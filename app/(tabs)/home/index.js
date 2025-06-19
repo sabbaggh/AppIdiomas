@@ -7,50 +7,18 @@ import DialogueCard from './components/dialogueCard'
 import { useRouter } from 'expo-router'
 import { useUser } from '../../context/UserContext'
 
-const convos = [
-  {
-    "title": "Ordenar un cafe",
-    "id": 1,
-    "language": "CN",
-    "level": "beginner",
-    "image": "https://img-cdn.inc.com/image/upload/f_webp,q_auto,c_fit/images/panoramic/GettyImages-1318950018_535375_uwicaq.jpg"
-  },
-  {
-    "title": "Llegar tarde al trabajo",
-    "id": 2,
-    "language": "CN",
-    "level": "intermediate",
-    "image": "https://nypost.com/wp-content/uploads/sites/2/2025/01/office-worker-coming-late-meeting-97303488.jpg?quality=75&strip=all"
-  },
-  {
-    "title": "Ordenar un cafe",
-    "id": 3,
-    "language": "CN",
-    "level": "advanced",
-    "image": "xd",
-  },
-  {
-    "title": "Primer dia de clases",
-    "id": 4,
-    "language": "CN",
-    "level": "beginner",
-    "image": "https://www.parentmap.com/sites/default/files/styles/1180x660_scaled_cropped/public/2024-08/girl%20on%20first%20day%20of%20school%20holding%20a%20sign_istock.jpg?itok=5yOyTbBM"
-  },
-  {
-    "title": "Conociendo nuevos colegas",
-    "id": 5,
-    "language": "CN",
-    "level": "intermediate",
-    "image": "https://www.rwrecruitment.com/wp-content/uploads/2019/09/Getting-to-know-your-colleagues-in-a-new-job.jpg"
-  },
-]
-
 export default function Home() {
   const router = useRouter();
-  const {userDataa} = useUser();
+  const { userDataa } = useUser();
   console.log(userDataa)
   const [componentsLeft, setComponentsLeft] = useState([]);
   const [componentsRight, setComponentsRight] = useState([]);
+  const [convos, setConvos] = useState([]);
+
+  useEffect(() => {
+    fetchConvosFront();
+  }, []);
+
   useEffect(() => {
     const left = [];
     const right = [];
@@ -66,14 +34,39 @@ export default function Home() {
 
     setComponentsLeft(left);
     setComponentsRight(right);
-  }, []);
+  }, [convos])
+
+  const fetchConvosFront = async () => {
+    try {
+      const response = await fetch(`http://192.168.100.75:8000/convos/get-front?language=${userDataa.language}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error al obtener las conversaciones:", errorText);
+        alert("Error al obtener las conversaciones");
+        return;
+      }
+      const result = await response.json();
+      console.log(result);
+      setConvos(result);
+
+    }
+    catch (error) {
+      console.error("Error de red o servidor:", error);
+      alert("Error de conexión con el servidor");
+    }
+  }
 
 
   return (
     <SafeAreaView className="flex-1 bg-black">
       <View className="flex-1 px-5">
         {/* Encabezado */}
-        <View className="h-16 w-full flex-row justify-start items-center px-2 gap-x-2 border-b-fuchsia-500 border-2">
+        <View className="h-16 w-full flex-row justify-start items-center px-2 gap-x-2 border-b-blue-500 border-2">
           <Feather name="user" size={28} color="white" />
           <Text className="text-white text-2xl">{userDataa.language == "cn" ? "你好" : userDataa.language == "pt" ? "Obrigado" : "Hello"} {userDataa.mail}!</Text>
         </View>
@@ -85,7 +78,7 @@ export default function Home() {
           showsVerticalScrollIndicator={false}
         >
           {/* Sección del robot */}
-          <View className="w-full h-48 bg-fuchsia-500 rounded-3xl mt-10 p-2 flex-row justify-center items-center gap-x-2">
+          <View className="w-full h-48 bg-blue-500 rounded-3xl mt-10 p-2 flex-row justify-center items-center gap-x-2">
             <View className="w-5/12 justify-center items-center">
               <MaterialCommunityIcons name="robot-happy-outline" size={120} color="white" />
             </View>

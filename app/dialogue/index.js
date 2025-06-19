@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const MessageSystem = ({ message, role }) => {
   return (
     <View className="flex-row justify-start mb-8">
-      <View className="bg-fuchsia-100 p-3 rounded-xl rounded-tl-none max-w-[80%]">
+      <View className="bg-blue-100 p-3 rounded-xl rounded-tl-none max-w-[80%]">
         <Text className="font-bold text-gray-700 mb-1 text-lg">{role}:</Text>
         <Text className="text-gray-800 text-2xl">{message}</Text>
       </View>
@@ -18,7 +18,7 @@ const MessageSystem = ({ message, role }) => {
 const MessageUser = ({ message }) => {
   return (
     <View className="flex-row justify-end mb-8">
-      <View className="bg-fuchsia-600 p-3 rounded-xl rounded-tr-none max-w-[80%]">
+      <View className="bg-blue-600 p-3 rounded-xl rounded-tr-none max-w-[80%]">
         <Text className="text-white text-2xl">{message}</Text>
       </View>
     </View>
@@ -122,7 +122,7 @@ const Dialogue = () => {
       {conversation.some(msg => msg.state === "wait") && (
         <View className="absolute bottom-4 left-0 right-0 items-center">
           <TouchableOpacity 
-            className="bg-fuchsia-500 py-3 px-6 rounded-full shadow-md"
+            className="bg-blue-500 py-3 px-6 rounded-full shadow-md"
             onPress={handleConfirm}
           >
             <Text className="text-white font-bold text-xl">Confirmado</Text>

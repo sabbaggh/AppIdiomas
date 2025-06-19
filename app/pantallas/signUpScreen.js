@@ -50,7 +50,7 @@ export default function SignUpScreen({ setPantalla }) {
 						<TextInput className='text-white text-lg px-2 w-full' secureTextEntry={true} placeholder='Contraseña' placeholderTextColor={"#CCC"} onChangeText={(text) => setPassword(text)} value={password} />
 					</View>
 
-					<TouchableOpacity className="bg-fuchsia-500 w-full h-14 rounded-2xl text-center items-center justify-center flex-row gap-x-2 mb-3" onPress={verifyData}>
+					<TouchableOpacity className="bg-blue-500 w-full h-14 rounded-2xl text-center items-center justify-center flex-row gap-x-2 mb-3" onPress={verifyData}>
 						<Text className="text-xl text-white">Continuar</Text>
 						<Feather name="arrow-right" size={22} color="white" />
 					</TouchableOpacity>
