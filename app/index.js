@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Text, View, SafeAreaView, TouchableOpacity, Image } from "react-native";
 import SignUpScreen from "./pantallas/signUpScreen";
+import LoginScreen from "./pantallas/LoginScreen";
 import Feather from '@expo/vector-icons/Feather';
 
 export default function Index() {
@@ -34,13 +35,16 @@ export default function Index() {
               <Feather name="arrow-right" size={22} color="white" />
             </TouchableOpacity>
             
-            <TouchableOpacity className="border border-blue-500 w-full h-16 rounded-2xl items-center justify-center">
+            <TouchableOpacity className="border border-blue-500 w-full h-16 rounded-2xl items-center justify-center"
+            onPress={() => setPantalla("login")}>
               <Text className="text-xl text-blue-500 font-bold">Iniciar Sesión</Text>
             </TouchableOpacity>
           </View>
         </View>
-      ) : (
+      ) : pantalla == "signUp" ? (
         <SignUpScreen setPantalla={setPantalla} />
+      ) : (
+        <LoginScreen setPantalla={setPantalla} />
       )}
     </SafeAreaView>
   );
