@@ -59,9 +59,10 @@ const Dialogue = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioUri, setAudioUri] = useState(null);
   const route = useRoute();
-  const { dialogueData } = route.params || {};
-  const xdd = JSON.parse(dialogueData);
+  const { dialogueData, bot } = route.params || {};
 
+  const xdd = JSON.parse(dialogueData);
+  //console.log(typeof(bot));
   const getCurrentMessage = useCallback(() => {
     return conversation.find(msg => msg.state === "wait");
   }, [conversation]);
@@ -80,27 +81,35 @@ const Dialogue = () => {
   }, []);
 
   const fetchConversation = async () => {
-    try {
-      const response = await fetch(`http://192.168.100.75:8000/convos/get-conversation?id_conversaciones_front=${xdd.id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    if (bot === "true") {
+      console.log("ffefsfesfesfsfesfesfesfesfesfes bot")
+      console.log(xdd.conversation)
+      setConversation(JSON.parse(xdd.conversation))
+    }
+    if (xdd?.id) {
+      try {
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Error al obtener las conversaciones:", errorText);
-        alert("Error al obtener la conversacion");
-        return;
+        const response = await fetch(`http://192.168.100.75:8000/convos/get-conversation?id_conversaciones_front=${xdd.id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Error al obtener las conversaciones:", errorText);
+          alert("Error al obtener la conversacion");
+          return;
+        }
+
+        const result = await response.json();
+        console.log(result);
+        setConversation(result);
+      } catch (error) {
+        console.error("Error de red o servidor:", error);
+        alert("Error de conexión con el servidor");
       }
-
-      const result = await response.json();
-      console.log(result);
-      setConversation(result);
-    } catch (error) {
-      console.error("Error de red o servidor:", error);
-      alert("Error de conexión con el servidor");
     }
   };
 

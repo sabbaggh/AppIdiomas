@@ -1,19 +1,19 @@
 {
   "expo": {
-    "name": "AppIdiomas",
-    "slug": "AppIdiomas",
+    "name": "Parlancio",
+    "slug": "Parlancio",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/logo.png",
+    "icon": "./assets/images/logo2.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": false,
+    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo.png",
+        "foregroundImage": "./assets/images/logo2.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.juanincho231.AppIdiomas"

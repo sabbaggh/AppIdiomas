@@ -252,7 +252,7 @@ export default function UserDataForm({ password, email, setViewMain }) {
 
             const result = await response.json();
             console.log("Usuario registrado:", result);
-            setUserDataa(formattedUserData);
+            setUserDataa(result);
             router.navigate("/(tabs)/home");
         } catch (error) {
             console.error("Error de red o servidor:", error);

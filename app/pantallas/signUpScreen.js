@@ -37,10 +37,10 @@ export default function SignUpScreen({ setPantalla }) {
 
 				<View className='h-4/6 justify-center items-center px-7 w-full'>
 					{alerta}
-					<Text className='text-white mb-5 text-lg text-left w-full'>Ingresa tu correo electronico</Text>
+					<Text className='text-white mb-5 text-lg text-left w-full'>Ingresa tu nombre de usaurio</Text>
 					<View className='border-slate-300 h-14 bg-gray-800 rounded-xl w-full mb-7 flex-row items-center overflow-hidden px-2'>
 						<Feather name='mail' size={23} color="white" />
-						<TextInput className='text-white text-lg px-2 w-full' placeholder='ejemplo@correo.com' placeholderTextColor={"#CCC"} onChangeText={(text) => setEmail(text)} value={email} />
+						<TextInput className='text-white text-lg px-2 w-full' placeholder='usuario123' placeholderTextColor={"#CCC"} onChangeText={(text) => setEmail(text)} value={email} />
 					</View>
 
 

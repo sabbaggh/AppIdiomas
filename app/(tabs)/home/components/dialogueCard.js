@@ -20,7 +20,7 @@ const DialogueCard = ({ dialogueData, router }) => {
     <TouchableOpacity className={`h-64 mb-4 rounded-xl overflow-hidden`} onPress={() => {
       router.navigate({
         pathname: "../../dialogue",
-        params: { dialogueData: JSON.stringify(dialogueData) } // Envías todo el objeto
+        params: { dialogueData: JSON.stringify(dialogueData), bot:false } // Envías todo el objeto
       });
     }}>
       <ImageBackground

@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Feather from '@expo/vector-icons/Feather'
@@ -61,6 +61,51 @@ export default function Home() {
     }
   }
 
+  const fetchConvosAI = async () => {
+    try {
+      const transformUserData = (rawData) => {
+        return {
+          mail: rawData.mail,
+          password: rawData.password,
+          level: rawData.level,
+          corrections: rawData.corrections,
+          language: rawData.language,
+          interests: Object.keys(rawData).filter(
+            key => rawData[key] === true &&
+              !['mail', 'password', 'level', 'corrections', 'language', 'id'].includes(key)
+          )
+        };
+      };
+
+      const transformedData = transformUserData(userDataa);
+
+      const response = await fetch(`http://192.168.100.75:8000/convos/create-convo`, {
+        method: "POST",
+        body: JSON.stringify(transformedData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error al obtener las conversaciones:", errorText);
+        alert("Error al obtener las conversaciones");
+        return;
+      }
+      const result = await response.json();
+      //console.log(result);
+      router.navigate({
+        pathname: "../../dialogue",
+        params: { dialogueData:JSON.stringify({conversation: result, language: userDataa.language}), bot: true } // Envías todo el objeto
+      });
+
+    }
+    catch (error) {
+      console.error("Error de red o servidor:", error);
+      alert("Error de conexión con el servidor");
+    }
+  }
+
 
   return (
     <SafeAreaView className="flex-1 bg-black">
@@ -68,7 +113,7 @@ export default function Home() {
         {/* Encabezado */}
         <View className="h-16 w-full flex-row justify-start items-center px-2 gap-x-2 border-b-blue-500 border-2">
           <Feather name="user" size={28} color="white" />
-          <Text className="text-white text-2xl">{userDataa.language == "cn" ? "你好" : userDataa.language == "pt" ? "Obrigado" : "Hello"} {userDataa.mail}!</Text>
+          <Text className="text-white text-2xl">{userDataa.language == "cn" ? "你好" : userDataa.language == "pt" ? "Olá" : "Hello"} {userDataa.mail}!</Text>
         </View>
 
         {/* Contenido desplazable */}
@@ -78,7 +123,7 @@ export default function Home() {
           showsVerticalScrollIndicator={false}
         >
           {/* Sección del robot */}
-          <View className="w-full h-48 bg-blue-500 rounded-3xl mt-10 p-2 flex-row justify-center items-center gap-x-2">
+          <TouchableOpacity className="w-full h-48 bg-blue-500 rounded-3xl mt-10 p-2 flex-row justify-center items-center gap-x-2" onPress={() => { fetchConvosAI() }}>
             <View className="w-5/12 justify-center items-center">
               <MaterialCommunityIcons name="robot-happy-outline" size={120} color="white" />
             </View>
@@ -90,7 +135,7 @@ export default function Home() {
                 Crea una conversacion sobre temas de tu interes de acuerdo con tu nivel
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
 
           {/* Título de conversaciones */}
           <View className='w-full my-10'>
