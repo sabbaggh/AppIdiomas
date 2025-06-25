@@ -38,7 +38,7 @@ export default function Home() {
 
   const fetchConvosFront = async () => {
     try {
-      const response = await fetch(`http://192.168.100.75:8000/convos/get-front?language=${userDataa.language}`, {
+      const response = await fetch(`https://back-parlancio.yellowcoast-a71c2fa8.westus2.azurecontainerapps.io/convos/get-front?language=${userDataa.language}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +79,7 @@ export default function Home() {
 
       const transformedData = transformUserData(userDataa);
 
-      const response = await fetch(`http://192.168.100.75:8000/convos/create-convo`, {
+      const response = await fetch(`https://back-parlancio.yellowcoast-a71c2fa8.westus2.azurecontainerapps.io/convos/create-convo`, {
         method: "POST",
         body: JSON.stringify(transformedData),
         headers: {

@@ -235,7 +235,7 @@ export default function UserDataForm({ password, email, setViewMain }) {
             }),
         };
         try {
-            const response = await fetch("http://192.168.100.75:8000/users/sign-up", {
+            const response = await fetch("https://back-parlancio.yellowcoast-a71c2fa8.westus2.azurecontainerapps.io/users/sign-up", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

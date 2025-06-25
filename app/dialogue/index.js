@@ -89,7 +89,7 @@ const Dialogue = () => {
     if (xdd?.id) {
       try {
 
-        const response = await fetch(`http://192.168.100.75:8000/convos/get-conversation?id_conversaciones_front=${xdd.id}`, {
+        const response = await fetch(`https://back-parlancio.yellowcoast-a71c2fa8.westus2.azurecontainerapps.io/convos/get-conversation?id_conversaciones_front=${xdd.id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -198,7 +198,7 @@ const Dialogue = () => {
       formData.append('language', languageCode);
 
       const response = await axios.post(
-        'http://192.168.100.75:8000/convos/evaluate',
+        'https://back-parlancio.yellowcoast-a71c2fa8.westus2.azurecontainerapps.io/convos/evaluate',
         formData,
         {
           headers: {

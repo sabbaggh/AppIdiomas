@@ -14,7 +14,7 @@ export default function LoginScreen({ setPantalla }) {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://192.168.100.75:8000/users/login", {
+      const response = await fetch("https://back-parlancio.yellowcoast-a71c2fa8.westus2.azurecontainerapps.io/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
